@@ -44,9 +44,9 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 | # | Item | Status | Verified by |
 |---|------|--------|-------------|
 | 6 | ModelManager: download, progress, resume, verify, remove | done | Qwen3 4B downloaded through the app with live progress; the 14B download was interrupted by a relaunch and resumed from its `.partial` file; `verify` recomputed SHA-256 of the 4B files ("All files match their checksums"); 9 model manager tests cover progress, cancel, failure, resume, remove, shared load and load failure |
-| 7 | Streaming chat through MLX with cancellation | done | Qwen3 4B loads in 1.5-1.7 s and streams at 66.8 tokens/s (23-token answer); a 300-word story was cut off by Escape mid-sentence and the partial answer stayed on screen; conversation window shows the transcript |
+| 7 | Streaming chat through MLX with cancellation | done | Qwen3 14B (default): loads in 2.0 s (weights are memory-mapped, the first answer pays for paging them in), 24.0 tokens/s on a 78-token answer, 35% system memory free while resident. Qwen3 4B: loads in 1.5-1.7 s, 66.8 tokens/s. A 300-word story was cut off by Escape mid-sentence and the partial answer stayed on screen; the conversation window shows the transcript |
 | 8 | Structured tool calling via MLXLMCommon | done | `get_current_time` call parsed by MLXLMCommon, executed, result fed back, final answer shown with the activity timeline; 8 agent loop tests cover plain answers, tool results, unknown tools, malformed arguments, step limit, denied confirmation, hidden reasoning and cancellation |
-| 9 | System, file, clipboard, weather tools | done | Verified live: weather for Sydney via Open-Meteo, frontmost app (Google Chrome), Spotlight PDF search, open_app launched Calculator, write_clipboard set the clipboard; 8 weather parsing tests, 8 argument validation tests, 3 path policy tests |
+| 9 | System, file, clipboard, weather tools | done | Verified live with the 14B model: Melbourne weekend forecast (Saturday and Sunday lines from Open-Meteo); with the 4B model: weather for Sydney, frontmost app (Google Chrome), Spotlight PDF search, open_app launched Calculator, write_clipboard set the clipboard; 8 weather parsing tests, 8 argument validation tests, 3 path policy tests |
 | 10 | Confirmation policy and risk levels | done | Medium-risk `write_clipboard` showed "Replace the clipboard with \"banana\"?" with Cancel and Allow; Return allowed it (clipboard changed), Escape on a second run denied it (clipboard unchanged); Tools settings list risk per tool and the medium-risk toggle |
 
 ## Phase 3: Seeing and acting
@@ -79,7 +79,7 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 
 ## Needs manual action
 
-Nothing yet.
+Nothing yet. Both models are downloaded on this machine (8.32 GB and 2.28 GB under Application Support).
 
 ## Log
 
