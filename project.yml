@@ -64,6 +64,9 @@ targets:
         NSCalendarsFullAccessUsageDescription: Nomi reads and creates calendar events only when you ask it to.
         NSRemindersFullAccessUsageDescription: Nomi creates reminders only when you ask it to.
         NSLocationWhenInUseUsageDescription: Nomi uses your location only to answer weather questions when no home location is set.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.mehulfursule.nomi
+            CFBundleURLSchemes: [nomi]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mehulfursule.nomi

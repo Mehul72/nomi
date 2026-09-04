@@ -20,13 +20,15 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 - App is `LSUIElement` (no Dock icon). A status item gives access to Settings and Quit.
 - Unit tests are hosted by the app target. The app skips panel creation when it detects the test runner.
 - Displays without a notch get a top-centre island sized like a typical housing so the interaction is the same.
+- The notch window keeps one fixed frame (largest open size). Transparent pixels pass clicks through (verified with `NSWindow.windowNumber(at:)`), so resizing the window per state is unnecessary and avoided a SwiftUI layout crash.
+- Commits go on `main`: single contributor, fresh repository, and the resume flow reads a linear `git log`.
 
 ## Phase 1: Shell
 
 | # | Item | Status | Verified by |
 |---|------|--------|-------------|
 | 1 | Xcode project, native .app, signing, .gitignore | done | `xcodebuild build` and `xcodebuild test` succeed; `codesign -dv` shows team MACDPWQG37, hardened runtime, no sandbox |
-| 2 | Notch panel: idle / hover / open, geometry on notched and external displays | not started | |
+| 2 | Notch panel: idle / hover / open, geometry on notched and external displays | done | 11 geometry tests pass; pixel measurement of screenshots: idle 663-848 x 0-32 pt equals housing, hover 659-852 x 0-36, open 545-965 wide; hit-test probe shows transparent pixels pass clicks through |
 | 3 | Global shortcut (Option+Space, configurable) | not started | |
 | 4 | Settings window skeleton, onboarding skeleton | not started | |
 | 5 | Screenshot every state and review | not started | |
@@ -76,3 +78,6 @@ Nothing yet.
 ## Log
 
 - 2026-09-04: Inspected machine, toolchain, certificates, package registries. Wrote this file.
+- 2026-09-04: First panel attempt resized the window per state and crashed inside NSHostingView layout (setFrame during a display cycle). Replaced with a fixed window frame.
+- 2026-09-04: `isFloatingPanel = true` resets `level`; the level must be set afterwards or the surface sits under the menu bar.
+- 2026-09-04: zsh has a `log` builtin. Use `/usr/bin/log show --predicate 'subsystem == "com.mehulfursule.nomi"'`.
