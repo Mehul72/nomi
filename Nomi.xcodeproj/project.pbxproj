@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01C0EDDB48FF438CFAE74305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F57A504429CA3D5342B6CFB /* Assets.xcassets */; };
+		3D2907BE79B0C290B47F17D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09420F153618ABA957E35CA2 /* AppDelegate.swift */; };
+		5599FE3DBA66D50BCDA5884C /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444201FF9B0296FEC8B239E /* SmokeTests.swift */; };
+		9B30244B7FD72AD6E226C974 /* NomiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F94FA884532F7CF0E810DA /* NomiApp.swift */; };
+		AC426D78D32C8C57CA0F5DD6 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */; };
+		F62A0D0C75CA3768A4E3194D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4FF8007C90AE52938E279 /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E31DFAE6FA68FBFDB0079B51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C068BF05C510306F7A39BA2B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B07A2CF2CA7111FDD489DE7;
+			remoteInfo = Nomi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09420F153618ABA957E35CA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F57A504429CA3D5342B6CFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52D4FF8007C90AE52938E279 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		67F94FA884532F7CF0E810DA /* NomiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomiApp.swift; sourceTree = "<group>"; };
+		72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		8A6FFF9732BFC6A6EDB88913 /* Nomi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nomi.entitlements; sourceTree = "<group>"; };
+		E309461932F89F5AF71FE5D8 /* Nomi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E444201FF9B0296FEC8B239E /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
+		E949A9D6F277B4FF8919CD04 /* NomiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NomiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1AE436BA3878FEC4233A11F7 = {
+			isa = PBXGroup;
+			children = (
+				685801F502475CFD3106636A /* Nomi */,
+				BD7883A36D6C8D3DA382B547 /* NomiTests */,
+				F8A9B5F84032E6AF37B309C1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		587E72F0FB2E16E3C09A4A8F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E1289B4F63328AA0D1EB8EEE /* Settings */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		685801F502475CFD3106636A /* Nomi */ = {
+			isa = PBXGroup;
+			children = (
+				DBAF08E87C218340128A0D00 /* App */,
+				ABA0E989C0B2E95BC84078EB /* Resources */,
+				587E72F0FB2E16E3C09A4A8F /* UI */,
+				8A6FFF9732BFC6A6EDB88913 /* Nomi.entitlements */,
+			);
+			path = Nomi;
+			sourceTree = "<group>";
+		};
+		ABA0E989C0B2E95BC84078EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F57A504429CA3D5342B6CFB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BD7883A36D6C8D3DA382B547 /* NomiTests */ = {
+			isa = PBXGroup;
+			children = (
+				E444201FF9B0296FEC8B239E /* SmokeTests.swift */,
+			);
+			path = NomiTests;
+			sourceTree = "<group>";
+		};
+		DBAF08E87C218340128A0D00 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				09420F153618ABA957E35CA2 /* AppDelegate.swift */,
+				67F94FA884532F7CF0E810DA /* NomiApp.swift */,
+				72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E1289B4F63328AA0D1EB8EEE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				52D4FF8007C90AE52938E279 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F8A9B5F84032E6AF37B309C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E309461932F89F5AF71FE5D8 /* Nomi.app */,
+				E949A9D6F277B4FF8919CD04 /* NomiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73A51498C69AF9846B03D1D1 /* NomiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 145480C6181966ECA3ECA9BE /* Build configuration list for PBXNativeTarget "NomiTests" */;
+			buildPhases = (
+				81C7DDAAA8991AA69E061759 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7833522B323E36FE6F17A77F /* PBXTargetDependency */,
+			);
+			name = NomiTests;
+			packageProductDependencies = (
+			);
+			productName = NomiTests;
+			productReference = E949A9D6F277B4FF8919CD04 /* NomiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7B07A2CF2CA7111FDD489DE7 /* Nomi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 271E11BB4170FC7F0DB3E672 /* Build configuration list for PBXNativeTarget "Nomi" */;
+			buildPhases = (
+				C223D1330DC7FD8FCDBA7842 /* Sources */,
+				BF644954E9525D2BB2C021B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nomi;
+			packageProductDependencies = (
+			);
+			productName = Nomi;
+			productReference = E309461932F89F5AF71FE5D8 /* Nomi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C068BF05C510306F7A39BA2B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					73A51498C69AF9846B03D1D1 = {
+						DevelopmentTeam = MACDPWQG37;
+						ProvisioningStyle = Manual;
+					};
+					7B07A2CF2CA7111FDD489DE7 = {
+						DevelopmentTeam = MACDPWQG37;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 698B518F4C9507E89D15CF00 /* Build configuration list for PBXProject "Nomi" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1AE436BA3878FEC4233A11F7;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F8A9B5F84032E6AF37B309C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B07A2CF2CA7111FDD489DE7 /* Nomi */,
+				73A51498C69AF9846B03D1D1 /* NomiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF644954E9525D2BB2C021B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C0EDDB48FF438CFAE74305 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81C7DDAAA8991AA69E061759 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599FE3DBA66D50BCDA5884C /* SmokeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C223D1330DC7FD8FCDBA7842 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D2907BE79B0C290B47F17D6 /* AppDelegate.swift in Sources */,
+				9B30244B7FD72AD6E226C974 /* NomiApp.swift in Sources */,
+				F62A0D0C75CA3768A4E3194D /* SettingsView.swift in Sources */,
+				AC426D78D32C8C57CA0F5DD6 /* StatusItemController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7833522B323E36FE6F17A77F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B07A2CF2CA7111FDD489DE7 /* Nomi */;
+			targetProxy = E31DFAE6FA68FBFDB0079B51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A8980FB6D3DEAFD4852CF938 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mehulfursule.nomi.tests;
+				SDKROOT = macosx;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nomi.app/Contents/MacOS/Nomi";
+			};
+			name = Debug;
+		};
+		A92F63D938DEF32236B41C43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MACDPWQG37;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A9C20551EF011B65AD244223 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mehulfursule.nomi.tests;
+				SDKROOT = macosx;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nomi.app/Contents/MacOS/Nomi";
+			};
+			name = Release;
+		};
+		C4D120BB07B6845EDA3A8E57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nomi/Nomi.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Nomi/Info.plist;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mehulfursule.nomi;
+				PRODUCT_NAME = Nomi;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E228305D736C8959EE7C595F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = MACDPWQG37;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		F1AC860254B94B1DF9A976C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nomi/Nomi.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Nomi/Info.plist;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mehulfursule.nomi;
+				PRODUCT_NAME = Nomi;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		145480C6181966ECA3ECA9BE /* Build configuration list for PBXNativeTarget "NomiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8980FB6D3DEAFD4852CF938 /* Debug */,
+				A9C20551EF011B65AD244223 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		271E11BB4170FC7F0DB3E672 /* Build configuration list for PBXNativeTarget "Nomi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AC860254B94B1DF9A976C5 /* Debug */,
+				C4D120BB07B6845EDA3A8E57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		698B518F4C9507E89D15CF00 /* Build configuration list for PBXProject "Nomi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E228305D736C8959EE7C595F /* Debug */,
+				A92F63D938DEF32236B41C43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C068BF05C510306F7A39BA2B /* Project object */;
+}

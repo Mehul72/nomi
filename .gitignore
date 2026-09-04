@@ -1,0 +1,41 @@
+# Private build prompt, never committed
+notch-assistant-prompt.md
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved.bak
+
+# Models, downloaded documentation and user data never belong in Git
+Models/downloaded/
+*.safetensors
+*.gguf
+*.mlmodelc
+
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+
+# Local secrets and machine-specific overrides
+*.local.xcconfig
+.env
+.env.*
+
+# Screenshots taken during review, except the curated ones in docs/screenshots
+review-screenshots/
