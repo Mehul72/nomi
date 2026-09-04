@@ -6,10 +6,12 @@ final class OnboardingWindowController {
     private var window: NSWindow?
     private let preferences: Preferences
     private let modelManager: ModelManager
+    private let permissions: PermissionsCenter
 
-    init(preferences: Preferences, modelManager: ModelManager) {
+    init(preferences: Preferences, modelManager: ModelManager, permissions: PermissionsCenter) {
         self.preferences = preferences
         self.modelManager = modelManager
+        self.permissions = permissions
     }
 
     func show() {
@@ -20,6 +22,7 @@ final class OnboardingWindowController {
         }
         let content = OnboardingView(shortcut: preferences.shortcut) { [weak self] in self?.finish() }
             .environment(modelManager)
+            .environment(permissions)
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
         window.styleMask = [.titled, .closable, .fullSizeContentView]
         window.titlebarAppearsTransparent = true

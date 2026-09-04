@@ -41,7 +41,18 @@ nonisolated enum ModelCatalog {
 
     static let languageModels = [defaultLanguageModel, lightweightLanguageModel]
 
+    /// Optional: only downloaded when the user turns on screen descriptions in Settings.
+    static let visionModel = ModelDescriptor(
+        id: "mlx-community/Qwen3-VL-4B-Instruct-4bit",
+        displayName: "Qwen3 VL 4B",
+        kind: .vision,
+        approximateBytes: 3_110_000_000,
+        summary: "Describes images, charts and layouts on screen. Loaded only for a screen question."
+    )
+
+    static var all: [ModelDescriptor] { languageModels + [visionModel] }
+
     static func descriptor(for id: String) -> ModelDescriptor? {
-        languageModels.first { $0.id == id }
+        all.first { $0.id == id }
     }
 }

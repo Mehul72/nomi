@@ -53,9 +53,9 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 
 | # | Item | Status | Verified by |
 |---|------|--------|-------------|
-| 11 | Accessibility inspection and generic UI action tools | not started | |
-| 12 | Permissions UI with real state | not started | |
-| 13 | What's on my screen: capture, OCR, layout mapping | not started | |
+| 11 | Accessibility inspection and generic UI action tools | blocked | Built: `AccessibilityInspector` (tree walk with depth and count limits, temporary IDs, AXPress and other actions, set value, focus), `InputSynthesizer` (key chords, scroll, click fallback), tools `inspect_ui`, `find_ui_element`, `perform_ui_action`, `set_ui_value`, `press_key`, `scroll`, `focus_element`; 9 unit tests. Live check blocked: Nomi has no Accessibility permission on this machine, and the TextEdit smoke test skips itself for the same reason |
+| 12 | Permissions UI with real state | done | Settings > Permissions reads AXIsProcessTrusted, CGPreflightScreenCaptureAccess, AVCaptureDevice, SFSpeechRecognizer, CLLocationManager and EKEventStore each time it appears; screenshot shows Accessibility and Screen Recording "Not allowed", the others "Not asked yet"; onboarding page 3 shows the Accessibility state with a button to System Settings |
+| 13 | What's on my screen: capture, OCR, layout mapping | blocked | Built: `ScreenCapture` (ScreenCaptureKit, front window, native scale, no cursor), `TextRecognizer` (Vision, reading order, regions mapped to screen points), `ScreenReader` (Accessibility first, OCR when the app exposes under 200 characters), tools `describe_screen`, `read_screen_text`, `capture_window`. Asking "What's on my screen?" with the 14B model called `describe_screen` and answered with the human-readable permission message. Live OCR blocked on Screen Recording permission |
 | 14 | Optional local vision model | not started | |
 
 ## Phase 4: Knowledge
@@ -79,7 +79,10 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 
 ## Needs manual action
 
-Nothing yet. Both models are downloaded on this machine (8.32 GB and 2.28 GB under Application Support).
+1. Grant Accessibility to Nomi: System Settings > Privacy & Security > Accessibility, add `build/DerivedData/Build/Products/Debug/Nomi.app` (or click Allow… in Nomi's Settings > Permissions). Then re-run the UI automation checks and the TextEdit smoke test (`AccessibilitySmokeTests`, which needs the test host allowed as well).
+2. Grant Screen Recording the same way (Privacy_ScreenCapture). Then re-run "What's on my screen?" and `read_screen_text`.
+
+Both language models are downloaded on this machine (8.32 GB and 2.28 GB under Application Support).
 
 ## Log
 
@@ -88,6 +91,8 @@ Nothing yet. Both models are downloaded on this machine (8.32 GB and 2.28 GB und
 - 2026-09-04: `isFloatingPanel = true` resets `level`; the level must be set afterwards or the surface sits under the menu bar.
 - 2026-09-04: zsh has a `log` builtin. Use `/usr/bin/log show --predicate 'subsystem == "com.mehulfursule.nomi"'`.
 - 2026-09-04: Verification posts synthetic mouse and key events with CGEvent (no permission needed). Never post ⌘ key equivalents that way: if Nomi is not the active app they land in whatever is. Use `nomi://closewindows` to close windows.
+- 2026-09-05: Phase 3 built. Accessibility and Screen Recording are both denied for this build's signature, so the automation and OCR paths could only be exercised as far as their error messages. Their unit tests and the permission UI run.
+- 2026-09-05: Prompt cost with all 23 tools advertised: about 2150 prompt tokens, 3.4 s prefill on the 14B model (632 tokens/s). Worth trimming tool descriptions later.
 - 2026-09-05: Phase 2 tools verified live. The 4B model sometimes answers "I can't provide the weather" instead of calling the tool; the instructions now name the tools explicitly. Expect the 14B model to be more reliable.
 - 2026-09-05: `nomi://ask` from Launch Services activates Nomi, so the frontmost-app tool tracks the last app activated other than Nomi.
 - 2026-09-04: Phase 1 complete. Build, 23 tests, launch, notch open/close, shortcut, Settings and onboarding all verified on this machine.

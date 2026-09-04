@@ -8,13 +8,15 @@ final class SettingsWindowController {
     private let shortcut: ShortcutController
     private let modelManager: ModelManager
     private let registry: ToolRegistry
+    private let permissions: PermissionsCenter
     private let navigation = SettingsNavigation()
 
-    init(preferences: Preferences, shortcut: ShortcutController, modelManager: ModelManager, registry: ToolRegistry) {
+    init(preferences: Preferences, shortcut: ShortcutController, modelManager: ModelManager, registry: ToolRegistry, permissions: PermissionsCenter) {
         self.preferences = preferences
         self.shortcut = shortcut
         self.modelManager = modelManager
         self.registry = registry
+        self.permissions = permissions
     }
 
     func show(section: SettingsSection? = nil) {
@@ -34,6 +36,7 @@ final class SettingsWindowController {
             .environment(preferences)
             .environment(shortcut)
             .environment(modelManager)
+            .environment(permissions)
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
         window.title = "Settings"
         window.styleMask = [.titled, .closable, .miniaturizable, .fullSizeContentView]

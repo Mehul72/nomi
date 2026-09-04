@@ -23,10 +23,22 @@ struct ModelSettingsView: View {
                 Text("Models are stored in \(AppDirectories.models.path(percentEncoded: false)). Only the selected model is loaded into memory.")
             }
 
+            Section {
+                Toggle("Describe images and layouts on screen", isOn: $preferences.visionModelEnabled)
+                if preferences.visionModelEnabled {
+                    ModelRow(model: ModelCatalog.visionModel, isSelected: true) {}
+                        .environment(modelManager)
+                }
+            } header: {
+                Text("Vision model")
+            } footer: {
+                Text("Loaded only while answering a question about the screen, then released. With the 14B language model selected, that model is unloaded first and reloaded on the next question.")
+            }
+
             Section("Memory") {
                 LabeledContent("State", value: loadStateText)
                 if let statistics = modelManager.lastStatistics {
-                    LabeledContent("Last generation", value: String(format: "%.1f tokens/s, %d tokens", statistics.tokensPerSecond, statistics.generatedTokens))
+                    LabeledContent("Last generation", value: String(format: "%.1f tokens/s, %d tokens, prompt %.1f s", statistics.tokensPerSecond, statistics.generatedTokens, statistics.promptSeconds))
                 }
                 HStack {
                     Button("Load now") { Task { _ = await modelManager.loadedLanguageModel() } }

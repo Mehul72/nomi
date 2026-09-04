@@ -48,7 +48,7 @@ private struct ConversationRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Nomi").font(.caption).foregroundStyle(.secondary)
                 if !message.content.isEmpty {
-                    Text(message.content).textSelection(.enabled)
+                    Text(MarkdownText.rendered(message.content)).textSelection(.enabled)
                 }
                 ForEach(message.toolCalls, id: \.id) { call in
                     Label(call.name, systemImage: "wrench.and.screwdriver").font(.caption).foregroundStyle(.secondary)
@@ -63,5 +63,11 @@ private struct ConversationRow: View {
         case .system:
             EmptyView()
         }
+    }
+}
+
+enum MarkdownText {
+    static func rendered(_ text: String) -> AttributedString {
+        (try? AttributedString(markdown: text, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))) ?? AttributedString(text)
     }
 }

@@ -27,6 +27,7 @@ enum OnboardingPage: Int, CaseIterable {
 /// Five pages styled like the notch surface: black, white text at the specified opacities, 8 pt grid.
 struct OnboardingView: View {
     @Environment(ModelManager.self) private var modelManager
+    @Environment(PermissionsCenter.self) private var permissions
     let shortcut: KeyboardShortcut
     let onFinish: () -> Void
     @State private var page: OnboardingPage = .runsOnYourMac
@@ -75,10 +76,19 @@ struct OnboardingView: View {
             OnboardingDownloadPage(model: modelManager.selectedModel)
         case .giveItAccess:
             VStack(alignment: .leading, spacing: NotchStyle.rowSpacing) {
-                Text("To read and operate other apps, Nomi needs Accessibility permission. Nothing else is required to start.")
-                Text("Permission handling arrives with the automation features.")
-                    .foregroundStyle(NotchStyle.tertiaryText)
+                Text("To read and operate other apps, Nomi needs Accessibility permission. Nothing else is required to start; Screen Recording and the rest can be granted later in Settings when a feature asks for them.")
+                HStack(spacing: NotchStyle.rowSpacing) {
+                    Text(permissions.state(of: .accessibility) == .granted ? "Accessibility is allowed" : "Accessibility is not allowed yet")
+                        .foregroundStyle(NotchStyle.tertiaryText)
+                    Spacer()
+                    if permissions.state(of: .accessibility) != .granted {
+                        Button("Open System Settings") { Task { await permissions.request(.accessibility) } }
+                            .buttonStyle(NotchButtonStyle())
+                    }
+                }
+                .padding(.top, NotchStyle.rowSpacing)
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in permissions.refresh() }
         case .addKnowledge:
             VStack(alignment: .leading, spacing: NotchStyle.rowSpacing) {
                 Text("Add manuals and documentation later in Settings so Nomi can answer questions about the apps you use.")

@@ -18,6 +18,9 @@ enum URLCommand: Equatable {
     case download(String?)
     case load
     case verify(String?)
+    /// Runs the vision model on an image file and logs the description, so the swap and unload path can be checked
+    /// without Screen Recording permission.
+    case describe(String)
     #endif
 
     init?(url: URL) {
@@ -39,6 +42,9 @@ enum URLCommand: Equatable {
         case "download": self = .download(value("id"))
         case "load": self = .load
         case "verify": self = .verify(value("id"))
+        case "describe":
+            guard let path = value("path"), !path.isEmpty else { return nil }
+            self = .describe(path)
         #endif
         default: return nil
         }

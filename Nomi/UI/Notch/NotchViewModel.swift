@@ -8,6 +8,7 @@ enum ModelStatusLine: Equatable {
     case installed
     case starting
     case ready
+    case lookingAtScreen
 
     var text: String {
         switch self {
@@ -16,6 +17,7 @@ enum ModelStatusLine: Equatable {
         case .installed: "Local model installed"
         case .starting: "Starting local model"
         case .ready: "Local model ready"
+        case .lookingAtScreen: "Looking at your screen"
         }
     }
 }

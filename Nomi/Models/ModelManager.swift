@@ -1,3 +1,4 @@
+import CoreGraphics
 import Foundation
 import Observation
 
@@ -75,6 +76,7 @@ final class ModelManager {
 
     /// The one-line status the notch shows under the input field.
     var statusLine: ModelStatusLine {
+        if isLookingAtScreen { return .lookingAtScreen }
         switch loadState {
         case .ready: return .ready
         case .loading: return .starting
@@ -90,7 +92,7 @@ final class ModelManager {
     }
 
     func refreshInstallStates() {
-        for model in ModelCatalog.languageModels {
+        for model in ModelCatalog.all {
             if case .downloading = installStates[model.id] { continue }
             installStates[model.id] = Self.diskState(of: model, storage: storage)
         }
@@ -218,7 +220,34 @@ final class ModelManager {
         Task { await model?.unload() }
     }
 
+    // MARK: Vision
+
+    private(set) var isLookingAtScreen = false
+
+    var isVisionModelInstalled: Bool {
+        if case .installed = installState(of: ModelCatalog.visionModel) { return true }
+        return false
+    }
+
+    /// Loads the vision model for one description and releases it again. The 14B language model is unloaded first
+    /// because both do not fit comfortably beside a KV cache in 24 GB; the 4B model stays resident.
+    func describeWithVisionModel(image: @Sendable () async throws -> CGImage, question: String) async throws -> String? {
+        guard preferences.visionModelEnabled, isVisionModelInstalled else { return nil }
+        let storage = self.storage
+        let capture = try await image()
+        isLookingAtScreen = true
+        defer { isLookingAtScreen = false }
+        let languageModelIsLarge = selectedModel.id == ModelCatalog.defaultLanguageModel.id
+        if languageModelIsLarge, languageModel != nil {
+            unload()
+        }
+        let vision = try await MLXVisionModel.load(descriptor: ModelCatalog.visionModel, downloader: storage)
+        defer { Task { await vision.unload() } }
+        return try await vision.describe(capture, question: question)
+    }
+
     func record(_ statistics: GenerationStatistics) {
         lastStatistics = statistics
+        Log.model.notice("Generation: \(statistics.generatedTokens) tokens in \(statistics.generationSeconds, format: .fixed(precision: 2)) s (\(statistics.tokensPerSecond, format: .fixed(precision: 1)) tokens/s), prompt \(statistics.promptTokens) tokens in \(statistics.promptSeconds, format: .fixed(precision: 2)) s")
     }
 }

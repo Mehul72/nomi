@@ -173,7 +173,7 @@ private struct AnswerView: View {
 
     var body: some View {
         ScrollView(.vertical) {
-            Text(text)
+            Text(MarkdownText.rendered(text))
                 .font(NotchStyle.body)
                 .foregroundStyle(NotchStyle.primaryText)
                 .textSelection(.enabled)
@@ -187,6 +187,7 @@ private struct AnswerView: View {
                 .buttonStyle(NotchButtonStyle())
         }
     }
+
 }
 
 /// A plain sentence and two buttons. Allow is the default only for medium risk.

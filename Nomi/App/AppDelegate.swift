@@ -1,14 +1,24 @@
 import AppKit
+import ImageIO
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let preferences = Preferences()
     private(set) lazy var modelManager = ModelManager(preferences: preferences)
+    private(set) lazy var permissions = PermissionsCenter()
+    private let automation = AutomationContext()
     private(set) lazy var toolRegistry: ToolRegistry = {
+        let screenReader = ScreenReader(automation: automation)
+        let describe: VisionDescriber = { [modelManager] image, question in
+            try await modelManager.describeWithVisionModel(image: image, question: question)
+        }
         let registry = ToolRegistry(tools: [
             CurrentTimeTool(), FrontmostAppTool(), RunningAppsTool(), OpenAppTool(), OpenURLTool(), ShowNotificationTool(),
             SearchFilesTool(), ReadTextFileTool(), CreateTextFileTool(), MoveFileTool(),
             ReadClipboardTool(), WriteClipboardTool(),
             WeatherTool(),
+            DescribeScreenTool(reader: screenReader, vision: describe), ReadScreenTextTool(reader: screenReader), CaptureWindowTool(reader: screenReader),
+            InspectUITool(context: automation), FindUIElementTool(context: automation), PerformUIActionTool(context: automation),
+            SetUIValueTool(context: automation), FocusElementTool(context: automation), PressKeyTool(context: automation), ScrollTool(context: automation),
         ])
         for name in preferences.disabledToolNames {
             registry.setEnabled(false, name: name)
@@ -18,8 +28,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private(set) lazy var assistant = Assistant(modelManager: modelManager, preferences: preferences, registry: toolRegistry)
     private lazy var conversation = ConversationWindowController(assistant: assistant)
     private(set) lazy var shortcut = ShortcutController(preferences: preferences) { [weak self] in self?.notch?.open() }
-    private(set) lazy var onboarding = OnboardingWindowController(preferences: preferences, modelManager: modelManager)
-    private lazy var settings = SettingsWindowController(preferences: preferences, shortcut: shortcut, modelManager: modelManager, registry: toolRegistry)
+    private(set) lazy var onboarding = OnboardingWindowController(preferences: preferences, modelManager: modelManager, permissions: permissions)
+    private lazy var settings = SettingsWindowController(preferences: preferences, shortcut: shortcut, modelManager: modelManager, registry: toolRegistry, permissions: permissions)
     private var statusItem: StatusItemController?
     private var notch: NotchCoordinator?
     private var urlCommands: URLCommandHandler?
@@ -77,6 +87,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             Task { _ = await modelManager.loadedLanguageModel() }
         case .verify(let id):
             modelManager.verify(id.flatMap(ModelCatalog.descriptor) ?? modelManager.selectedModel)
+        case .describe(let path):
+            Task {
+                let started = Date()
+                do {
+                    let url = URL(fileURLWithPath: path)
+                    let description = try await modelManager.describeWithVisionModel(image: {
+                        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
+                              let image = CGImageSourceCreateImageAtIndex(source, 0, nil) else {
+                            throw ToolError.failed("Could not read \(path)")
+                        }
+                        return image
+                    }, question: "What is shown in this image?")
+                    Log.model.notice("Vision description after \(Date().timeIntervalSince(started), format: .fixed(precision: 1)) s: \(description ?? "<vision model disabled or not installed>", privacy: .public)")
+                } catch {
+                    Log.model.error("Vision description failed: \(error, privacy: .public)")
+                }
+            }
         #endif
         }
     }

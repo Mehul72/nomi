@@ -10,4 +10,8 @@ nonisolated enum AppDirectories {
     static var models: URL {
         applicationSupport.appending(path: "Models", directoryHint: .isDirectory)
     }
+
+    static var captures: URL {
+        applicationSupport.appending(path: "Captures", directoryHint: .isDirectory)
+    }
 }

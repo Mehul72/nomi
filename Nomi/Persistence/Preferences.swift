@@ -20,6 +20,11 @@ final class Preferences {
         offlineMode = defaults.bool(forKey: Key.offlineMode)
         homeLocation = defaults.string(forKey: Key.homeLocation)
         disabledToolNames = Set(defaults.stringArray(forKey: Key.disabledToolNames) ?? [])
+        visionModelEnabled = defaults.bool(forKey: Key.visionModelEnabled)
+    }
+
+    var visionModelEnabled: Bool {
+        didSet { defaults.set(visionModelEnabled, forKey: Key.visionModelEnabled) }
     }
 
     var disabledToolNames: Set<String> {
@@ -83,6 +88,7 @@ final class Preferences {
         static let offlineMode = "offlineMode"
         static let homeLocation = "homeLocation"
         static let disabledToolNames = "disabledToolNames"
+        static let visionModelEnabled = "visionModelEnabled"
     }
 
     private static func decode<T: Decodable>(_ type: T.Type, from defaults: UserDefaults, key: String) -> T? {

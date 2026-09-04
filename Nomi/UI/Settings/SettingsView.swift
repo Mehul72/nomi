@@ -57,7 +57,7 @@ struct SettingsView: View {
         case .general: GeneralSettingsView()
         case .about: AboutSettingsView()
         case .model: ModelSettingsView()
-        case .permissions: PendingSettingsView(text: "Permission states appear here once screen and Accessibility features exist.")
+        case .permissions: PermissionsSettingsView()
         case .knowledge: PendingSettingsView(text: "Documentation import arrives with the knowledge features.")
         case .skills: PendingSettingsView(text: "Saved skills appear here once actions can be recorded.")
         case .tools: ToolsSettingsView(registry: registry)
