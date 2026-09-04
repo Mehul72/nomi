@@ -23,6 +23,10 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 - The notch window keeps one fixed frame (largest open size). Transparent pixels pass clicks through (verified with `NSWindow.windowNumber(at:)`), so resizing the window per state is unnecessary and avoided a SwiftUI layout crash.
 - Commits go on `main`: single contributor, fresh repository, and the resume flow reads a linear `git log`.
 - AppKit owns the lifecycle (`main.swift`, `NSApplicationMain`). The SwiftUI `Settings` scene never responded to `showSettingsWindow:` in this accessory app, so Settings and onboarding are plain `NSWindow`s hosting SwiftUI. A main menu built in code keeps ⌘Q and the Edit key equivalents working.
+- Model choice: `mlx-community/Qwen3-14B-4bit` stays the default. The MLX registry has newer Qwen3.5/3.6/3.8 releases but none in the 14B class (9B below, 27B above, and 27B at 4-bit does not fit the 24 GB budget with a KV cache). Lightweight option: `mlx-community/Qwen3-4B-Instruct-2507-4bit` (2.28 GB, loads, tool calling works).
+- Model files live in `~/Library/Application Support/Nomi/Models/<org>/<name>/` via the app's own `ModelDownloader` (Hugging Face tree API, ranged resume, SHA-256 verify). mlx-swift-lm's tokenizer loader comes from `swift-transformers`; no `HubClient` is used.
+- Thinking is disabled (`enable_thinking: false`) and a `HiddenSpanFilter` drops any `<think>` or `<tool_call>` text that reaches the output.
+- Building needs the Metal Toolchain (`xcodebuild -downloadComponent MetalToolchain`) and, from the command line, `-skipPackagePluginValidation -skipMacroValidation` for mlx-swift's build plugin and the MLXHuggingFace macros.
 - The `nomi://` URL scheme (`open`, `close`, `toggle`, `settings`, `welcome`) exists so scripts and the verification steps below can drive the app. `probe` and `closewindows` exist only in Debug builds.
 
 ## Phase 1: Shell
@@ -39,11 +43,11 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 
 | # | Item | Status | Verified by |
 |---|------|--------|-------------|
-| 6 | ModelManager: download, progress, resume, verify, remove | not started | |
-| 7 | Streaming chat through MLX with cancellation | not started | |
-| 8 | Structured tool calling via MLXLMCommon | not started | |
-| 9 | System, file, clipboard, weather tools | not started | |
-| 10 | Confirmation policy and risk levels | not started | |
+| 6 | ModelManager: download, progress, resume, verify, remove | done | Qwen3 4B downloaded through the app with live progress; the 14B download was interrupted by a relaunch and resumed from its `.partial` file; `verify` recomputed SHA-256 of the 4B files ("All files match their checksums"); 9 model manager tests cover progress, cancel, failure, resume, remove, shared load and load failure |
+| 7 | Streaming chat through MLX with cancellation | done | Qwen3 4B loads in 1.5-1.7 s and streams at 66.8 tokens/s (23-token answer); a 300-word story was cut off by Escape mid-sentence and the partial answer stayed on screen; conversation window shows the transcript |
+| 8 | Structured tool calling via MLXLMCommon | done | `get_current_time` call parsed by MLXLMCommon, executed, result fed back, final answer shown with the activity timeline; 8 agent loop tests cover plain answers, tool results, unknown tools, malformed arguments, step limit, denied confirmation, hidden reasoning and cancellation |
+| 9 | System, file, clipboard, weather tools | done | Verified live: weather for Sydney via Open-Meteo, frontmost app (Google Chrome), Spotlight PDF search, open_app launched Calculator, write_clipboard set the clipboard; 8 weather parsing tests, 8 argument validation tests, 3 path policy tests |
+| 10 | Confirmation policy and risk levels | done | Medium-risk `write_clipboard` showed "Replace the clipboard with \"banana\"?" with Cancel and Allow; Return allowed it (clipboard changed), Escape on a second run denied it (clipboard unchanged); Tools settings list risk per tool and the medium-risk toggle |
 
 ## Phase 3: Seeing and acting
 
@@ -84,4 +88,6 @@ Nothing yet.
 - 2026-09-04: `isFloatingPanel = true` resets `level`; the level must be set afterwards or the surface sits under the menu bar.
 - 2026-09-04: zsh has a `log` builtin. Use `/usr/bin/log show --predicate 'subsystem == "com.mehulfursule.nomi"'`.
 - 2026-09-04: Verification posts synthetic mouse and key events with CGEvent (no permission needed). Never post ⌘ key equivalents that way: if Nomi is not the active app they land in whatever is. Use `nomi://closewindows` to close windows.
+- 2026-09-05: Phase 2 tools verified live. The 4B model sometimes answers "I can't provide the weather" instead of calling the tool; the instructions now name the tools explicitly. Expect the 14B model to be more reliable.
+- 2026-09-05: `nomi://ask` from Launch Services activates Nomi, so the frontmost-app tool tracks the last app activated other than Nomi.
 - 2026-09-04: Phase 1 complete. Build, 23 tests, launch, notch open/close, shortcut, Settings and onboarding all verified on this machine.

@@ -6,13 +6,19 @@ final class SettingsWindowController {
     private var window: NSWindow?
     private let preferences: Preferences
     private let shortcut: ShortcutController
+    private let modelManager: ModelManager
+    private let registry: ToolRegistry
+    private let navigation = SettingsNavigation()
 
-    init(preferences: Preferences, shortcut: ShortcutController) {
+    init(preferences: Preferences, shortcut: ShortcutController, modelManager: ModelManager, registry: ToolRegistry) {
         self.preferences = preferences
         self.shortcut = shortcut
+        self.modelManager = modelManager
+        self.registry = registry
     }
 
-    func show() {
+    func show(section: SettingsSection? = nil) {
+        if let section { navigation.section = section }
         let window = self.window ?? makeWindow()
         self.window = window
         NSApp.activate()
@@ -24,9 +30,10 @@ final class SettingsWindowController {
     }
 
     private func makeWindow() -> NSWindow {
-        let content = SettingsView()
+        let content = SettingsView(navigation: navigation, registry: registry)
             .environment(preferences)
             .environment(shortcut)
+            .environment(modelManager)
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
         window.title = "Settings"
         window.styleMask = [.titled, .closable, .miniaturizable, .fullSizeContentView]

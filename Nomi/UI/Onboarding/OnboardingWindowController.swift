@@ -5,9 +5,11 @@ import SwiftUI
 final class OnboardingWindowController {
     private var window: NSWindow?
     private let preferences: Preferences
+    private let modelManager: ModelManager
 
-    init(preferences: Preferences) {
+    init(preferences: Preferences, modelManager: ModelManager) {
         self.preferences = preferences
+        self.modelManager = modelManager
     }
 
     func show() {
@@ -17,6 +19,7 @@ final class OnboardingWindowController {
             return
         }
         let content = OnboardingView(shortcut: preferences.shortcut) { [weak self] in self?.finish() }
+            .environment(modelManager)
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
         window.styleMask = [.titled, .closable, .fullSizeContentView]
         window.titlebarAppearsTransparent = true

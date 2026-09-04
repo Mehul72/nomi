@@ -4,9 +4,14 @@ import AppKit
 final class NotchCoordinator: NSObject {
     private(set) var controllers: [NotchPanelController] = []
     private let preferences: Preferences
+    private let modelManager: ModelManager
+    private let assistant: Assistant
+    var onOpenConversation: (() -> Void)?
 
-    init(preferences: Preferences) {
+    init(preferences: Preferences, modelManager: ModelManager, assistant: Assistant) {
         self.preferences = preferences
+        self.modelManager = modelManager
+        self.assistant = assistant
         super.init()
         rebuildForCurrentScreens()
         NotificationCenter.default.addObserver(
@@ -41,6 +46,12 @@ final class NotchCoordinator: NSObject {
 
     func closeAll() {
         controllers.forEach { $0.close() }
+    }
+
+    /// Opens the surface on the screen under the mouse and asks the question straight away.
+    func ask(_ question: String) {
+        open()
+        assistant.ask(question)
     }
 
     #if DEBUG
@@ -83,9 +94,11 @@ final class NotchCoordinator: NSObject {
                 updated.append(existing)
             } else {
                 let controller = NotchPanelController(
-                    displayID: id, display: layout, showsEscapeHint: !preferences.hasClosedNotchOnce
+                    displayID: id, display: layout, showsEscapeHint: !preferences.hasClosedNotchOnce,
+                    modelManager: modelManager, assistant: assistant
                 )
                 controller.onClosed = { [weak self] in self?.preferences.hasClosedNotchOnce = true }
+                controller.onOpenConversation = { [weak self] in self?.onOpenConversation?() }
                 updated.append(controller)
             }
         }

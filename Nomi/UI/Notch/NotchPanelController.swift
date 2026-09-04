@@ -6,30 +6,35 @@ final class NotchPanelController: NSObject {
     let displayID: CGDirectDisplayID
     let panel = NotchPanel()
     let model: NotchViewModel
+    let assistant: Assistant
     var onClosed: (() -> Void)?
+    var onOpenConversation: (() -> Void)?
 
     private let hostingView: NSHostingView<NotchSurfaceView>
     private var hoverTask: Task<Void, Never>?
     /// Incremented on every open or close so a stale delayed fade cannot land on a newer state.
     private var openGeneration = 0
 
-    init(displayID: CGDirectDisplayID, display: DisplayLayout, showsEscapeHint: Bool) {
+    init(displayID: CGDirectDisplayID, display: DisplayLayout, showsEscapeHint: Bool, modelManager: ModelManager, assistant: Assistant) {
         self.displayID = displayID
-        model = NotchViewModel(geometry: NotchGeometry(display: display), showsEscapeHint: showsEscapeHint)
-        hostingView = NSHostingView(rootView: NotchSurfaceView(model: model, actions: .none))
+        self.assistant = assistant
+        model = NotchViewModel(geometry: NotchGeometry(display: display), showsEscapeHint: showsEscapeHint, modelManager: modelManager)
+        hostingView = NSHostingView(rootView: NotchSurfaceView(model: model, assistant: assistant, actions: .none))
         hostingView.sizingOptions = []
         panel.contentView = hostingView
         super.init()
 
-        hostingView.rootView = NotchSurfaceView(model: model, actions: NotchActions(
+        hostingView.rootView = NotchSurfaceView(model: model, assistant: assistant, actions: NotchActions(
             open: { [weak self] in self?.open() },
             close: { [weak self] in self?.close() },
             hoverChanged: { [weak self] inside in self?.hoverChanged(inside) },
             submit: { [weak self] in self?.submit() },
+            escape: { [weak self] in self?.escapePressed() },
             microphoneTapped: { [weak self] in self?.microphoneTapped() },
+            openConversation: { [weak self] in self?.openConversation() },
             contentHeightChanged: { [weak self] height in self?.contentHeightChanged(height) }
         ))
-        panel.onCancel = { [weak self] in self?.close() }
+        panel.onCancel = { [weak self] in self?.escapePressed() }
 
         // The window always spans the largest surface; transparent pixels pass clicks through to whatever is beneath.
         panel.setFrame(model.geometry.maximumFrame, display: false)
@@ -121,6 +126,7 @@ final class NotchPanelController: NSObject {
             panel.orderOut(nil)
             panel.orderFrontRegardless()
         }
+        assistant.dismissResult()
         onClosed?()
     }
 
@@ -153,10 +159,30 @@ final class NotchPanelController: NSObject {
         }
     }
 
+    /// Escape stops whatever is running; a second press, or a press while idle, closes the surface.
+    func escapePressed() {
+        if assistant.isBusy {
+            assistant.cancel()
+            return
+        }
+        close()
+    }
+
     private func submit() {
+        if case .confirming(let request, _) = assistant.activity, model.input.isEmpty {
+            if request.allowIsDefault { assistant.resolveConfirmation(allow: true) }
+            return
+        }
         let question = model.input.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !question.isEmpty else { return }
-        model.transientStatus = "The local model is not installed yet"
+        model.input = ""
+        model.transientStatus = nil
+        assistant.ask(question)
+    }
+
+    private func openConversation() {
+        onOpenConversation?()
+        close()
     }
 
     private func microphoneTapped() {

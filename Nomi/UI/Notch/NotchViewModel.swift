@@ -4,6 +4,8 @@ import Observation
 enum ModelStatusLine: Equatable {
     case notDownloaded
     case downloading(percent: Int)
+    /// On disk but not in memory yet; the first question starts it.
+    case installed
     case starting
     case ready
 
@@ -11,6 +13,7 @@ enum ModelStatusLine: Equatable {
         switch self {
         case .notDownloaded: "Model not downloaded"
         case .downloading(let percent): "Downloading model \(percent)%"
+        case .installed: "Local model installed"
         case .starting: "Starting local model"
         case .ready: "Local model ready"
         }
@@ -26,13 +29,18 @@ final class NotchViewModel {
     var contentHeight: CGFloat = 0
     var isContentVisible = false
     var input = ""
-    var modelStatus: ModelStatusLine = .notDownloaded
     var transientStatus: String?
     var showsEscapeHint: Bool
+    private let modelManager: ModelManager
 
-    init(geometry: NotchGeometry, showsEscapeHint: Bool) {
+    init(geometry: NotchGeometry, showsEscapeHint: Bool, modelManager: ModelManager) {
         self.geometry = geometry
         self.showsEscapeHint = showsEscapeHint
+        self.modelManager = modelManager
+    }
+
+    var modelStatus: ModelStatusLine {
+        modelManager.statusLine
     }
 
     var surfaceSize: CGSize {

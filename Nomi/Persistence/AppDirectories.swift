@@ -6,4 +6,8 @@ nonisolated enum AppDirectories {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         return base.appending(path: "Nomi", directoryHint: .isDirectory)
     }
+
+    static var models: URL {
+        applicationSupport.appending(path: "Models", directoryHint: .isDirectory)
+    }
 }

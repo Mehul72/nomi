@@ -9,6 +9,14 @@ options:
   groupSortPosition: top
   defaultConfig: Debug
 
+packages:
+  mlx-swift-lm:
+    url: https://github.com/ml-explore/mlx-swift-lm
+    from: 3.31.4
+  swift-transformers:
+    url: https://github.com/huggingface/swift-transformers
+    from: 1.3.4
+
 settings:
   base:
     DEVELOPMENT_TEAM: MACDPWQG37
@@ -67,6 +75,15 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLName: com.mehulfursule.nomi
             CFBundleURLSchemes: [nomi]
+    dependencies:
+      - package: mlx-swift-lm
+        product: MLXLLM
+      - package: mlx-swift-lm
+        product: MLXLMCommon
+      - package: mlx-swift-lm
+        product: MLXHuggingFace
+      - package: swift-transformers
+        product: Tokenizers
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mehulfursule.nomi

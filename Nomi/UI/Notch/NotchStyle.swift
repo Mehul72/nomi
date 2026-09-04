@@ -49,3 +49,41 @@ struct NotchSurfaceShape: Shape {
         ).path(in: rect)
     }
 }
+
+/// Buttons on black surfaces: 8 pt radius, white fill at the specified opacities, body type.
+struct NotchButtonStyle: ButtonStyle {
+    var prominent = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(NotchStyle.body)
+            .foregroundStyle(prominent ? Color.black : NotchStyle.primaryText)
+            .padding(.horizontal, 16)
+            .frame(height: 28)
+            .background(
+                RoundedRectangle(cornerRadius: NotchStyle.controlRadius)
+                    .fill(prominent ? NotchStyle.primaryText : NotchStyle.fieldFill)
+            )
+            .opacity(configuration.isPressed ? 0.7 : 1)
+    }
+}
+
+/// The thinking indicator: one accent-coloured dot that breathes through opacity only.
+struct BreathingDot: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var dimmed = false
+
+    var body: some View {
+        Circle()
+            .fill(Color.accentColor)
+            .frame(width: 6, height: 6)
+            .opacity(dimmed ? 0.3 : 1)
+            .onAppear {
+                guard !reduceMotion else { return }
+                withAnimation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true)) {
+                    dimmed = true
+                }
+            }
+            .accessibilityHidden(true)
+    }
+}

@@ -35,31 +35,32 @@ enum SettingsSection: String, CaseIterable, Identifiable {
 }
 
 struct SettingsView: View {
-    @State private var selection: SettingsSection = .general
+    @Bindable var navigation: SettingsNavigation
+    let registry: ToolRegistry
 
     var body: some View {
         NavigationSplitView {
-            List(SettingsSection.allCases, selection: $selection) { section in
+            List(SettingsSection.allCases, selection: $navigation.section) { section in
                 Label(section.title, systemImage: section.symbol)
             }
             .navigationSplitViewColumnWidth(180)
         } detail: {
             detail
-                .navigationTitle(selection.title)
+                .navigationTitle(navigation.section.title)
         }
         .frame(width: 720, height: 480)
     }
 
     @ViewBuilder
     private var detail: some View {
-        switch selection {
+        switch navigation.section {
         case .general: GeneralSettingsView()
         case .about: AboutSettingsView()
-        case .model: PendingSettingsView(text: "The local model is set up in the next build. Nothing is downloaded yet.")
+        case .model: ModelSettingsView()
         case .permissions: PendingSettingsView(text: "Permission states appear here once screen and Accessibility features exist.")
         case .knowledge: PendingSettingsView(text: "Documentation import arrives with the knowledge features.")
         case .skills: PendingSettingsView(text: "Saved skills appear here once actions can be recorded.")
-        case .tools: PendingSettingsView(text: "Built-in tools and their confirmation levels appear here once tools exist.")
+        case .tools: ToolsSettingsView(registry: registry)
         case .mcp: PendingSettingsView(text: "MCP servers can be added here once the MCP client exists.")
         case .privacy: PrivacySettingsView()
         }

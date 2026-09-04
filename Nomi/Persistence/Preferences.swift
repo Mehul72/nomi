@@ -14,6 +14,36 @@ final class Preferences {
         showsMenuBarIcon = defaults.object(forKey: Key.showsMenuBarIcon) as? Bool ?? true
         playsSounds = defaults.object(forKey: Key.playsSounds) as? Bool ?? true
         speaksResponses = defaults.bool(forKey: Key.speaksResponses)
+        selectedModelID = defaults.string(forKey: Key.selectedModelID) ?? ModelCatalog.defaultLanguageModel.id
+        generation = Self.decode(GenerationSettings.self, from: defaults, key: Key.generation) ?? GenerationSettings()
+        confirmsMediumRisk = defaults.object(forKey: Key.confirmsMediumRisk) as? Bool ?? true
+        offlineMode = defaults.bool(forKey: Key.offlineMode)
+        homeLocation = defaults.string(forKey: Key.homeLocation)
+        disabledToolNames = Set(defaults.stringArray(forKey: Key.disabledToolNames) ?? [])
+    }
+
+    var disabledToolNames: Set<String> {
+        didSet { defaults.set(Array(disabledToolNames).sorted(), forKey: Key.disabledToolNames) }
+    }
+
+    var confirmsMediumRisk: Bool {
+        didSet { defaults.set(confirmsMediumRisk, forKey: Key.confirmsMediumRisk) }
+    }
+
+    var offlineMode: Bool {
+        didSet { defaults.set(offlineMode, forKey: Key.offlineMode) }
+    }
+
+    var homeLocation: String? {
+        didSet { defaults.set(homeLocation, forKey: Key.homeLocation) }
+    }
+
+    var selectedModelID: String {
+        didSet { defaults.set(selectedModelID, forKey: Key.selectedModelID) }
+    }
+
+    var generation: GenerationSettings {
+        didSet { Self.encode(generation, into: defaults, key: Key.generation) }
     }
 
     var showsMenuBarIcon: Bool {
@@ -47,6 +77,12 @@ final class Preferences {
         static let showsMenuBarIcon = "showsMenuBarIcon"
         static let playsSounds = "playsSounds"
         static let speaksResponses = "speaksResponses"
+        static let selectedModelID = "selectedModelID"
+        static let generation = "generation"
+        static let confirmsMediumRisk = "confirmsMediumRisk"
+        static let offlineMode = "offlineMode"
+        static let homeLocation = "homeLocation"
+        static let disabledToolNames = "disabledToolNames"
     }
 
     private static func decode<T: Decodable>(_ type: T.Type, from defaults: UserDefaults, key: String) -> T? {

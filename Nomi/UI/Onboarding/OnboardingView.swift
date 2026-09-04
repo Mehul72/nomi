@@ -26,6 +26,7 @@ enum OnboardingPage: Int, CaseIterable {
 
 /// Five pages styled like the notch surface: black, white text at the specified opacities, 8 pt grid.
 struct OnboardingView: View {
+    @Environment(ModelManager.self) private var modelManager
     let shortcut: KeyboardShortcut
     let onFinish: () -> Void
     @State private var page: OnboardingPage = .runsOnYourMac
@@ -49,10 +50,10 @@ struct OnboardingView: View {
                 Spacer()
                 if page != .runsOnYourMac {
                     Button("Back", action: back)
-                        .buttonStyle(OnboardingButtonStyle(prominent: false))
+                        .buttonStyle(NotchButtonStyle())
                 }
                 Button(page == .ready ? "Done" : "Continue", action: advance)
-                    .buttonStyle(OnboardingButtonStyle(prominent: true))
+                    .buttonStyle(NotchButtonStyle(prominent: true))
                     .keyboardShortcut(.defaultAction)
             }
         }
@@ -71,11 +72,7 @@ struct OnboardingView: View {
                 Text("No account, no API key and no cloud inference.")
             }
         case .downloadTheModel:
-            VStack(alignment: .leading, spacing: NotchStyle.rowSpacing) {
-                Text("The local model is a one-time download of several gigabytes and is stored in Application Support.")
-                Text("Model download arrives in the next build. Nothing is downloaded yet.")
-                    .foregroundStyle(NotchStyle.tertiaryText)
-            }
+            OnboardingDownloadPage(model: modelManager.selectedModel)
         case .giveItAccess:
             VStack(alignment: .leading, spacing: NotchStyle.rowSpacing) {
                 Text("To read and operate other apps, Nomi needs Accessibility permission. Nothing else is required to start.")
@@ -121,19 +118,54 @@ struct OnboardingView: View {
     }
 }
 
-private struct OnboardingButtonStyle: ButtonStyle {
-    let prominent: Bool
+/// The download step: what will be fetched, how big it is, live progress, and readiness.
+private struct OnboardingDownloadPage: View {
+    @Environment(ModelManager.self) private var modelManager
+    let model: ModelDescriptor
 
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(NotchStyle.body)
-            .foregroundStyle(prominent ? Color.black : NotchStyle.primaryText)
-            .padding(.horizontal, 16)
-            .frame(height: 28)
-            .background(
-                RoundedRectangle(cornerRadius: NotchStyle.controlRadius)
-                    .fill(prominent ? NotchStyle.primaryText : NotchStyle.fieldFill)
-            )
-            .opacity(configuration.isPressed ? 0.7 : 1)
+    var body: some View {
+        VStack(alignment: .leading, spacing: NotchStyle.rowSpacing) {
+            Text("Nomi answers with \(model.displayName), a one-time download of about \(model.approximateSizeText) stored in Application Support. You can pause and resume it, and remove it later in Settings.")
+            HStack(spacing: NotchStyle.rowSpacing) {
+                Text(stateText).foregroundStyle(NotchStyle.tertiaryText).monospacedDigit()
+                Spacer()
+                actionButton
+            }
+            .padding(.top, NotchStyle.rowSpacing)
+            if let fraction = modelManager.installState(of: model).fractionCompleted {
+                ProgressView(value: fraction)
+                    .progressViewStyle(.linear)
+                    .tint(NotchStyle.primaryText)
+            }
+            if case .interrupted(_, let message?) = modelManager.installState(of: model) {
+                Text(message).foregroundStyle(NotchStyle.tertiaryText)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var actionButton: some View {
+        switch modelManager.installState(of: model) {
+        case .notInstalled:
+            Button("Download") { modelManager.download(model) }.buttonStyle(NotchButtonStyle())
+        case .downloading:
+            Button("Pause") { modelManager.cancelDownload(model) }.buttonStyle(NotchButtonStyle())
+        case .interrupted:
+            Button("Resume") { modelManager.download(model) }.buttonStyle(NotchButtonStyle())
+        case .installed:
+            EmptyView()
+        }
+    }
+
+    private var stateText: String {
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .file
+        switch modelManager.installState(of: model) {
+        case .notInstalled: return "Not downloaded"
+        case .downloading(let completed, let total):
+            return "\(formatter.string(fromByteCount: completed)) of \(formatter.string(fromByteCount: total))"
+        case .interrupted(let completed, _): return "Paused at \(formatter.string(fromByteCount: completed))"
+        case .installed: return "Ready"
+        }
     }
 }
