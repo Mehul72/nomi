@@ -22,6 +22,8 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 - Displays without a notch get a top-centre island sized like a typical housing so the interaction is the same.
 - The notch window keeps one fixed frame (largest open size). Transparent pixels pass clicks through (verified with `NSWindow.windowNumber(at:)`), so resizing the window per state is unnecessary and avoided a SwiftUI layout crash.
 - Commits go on `main`: single contributor, fresh repository, and the resume flow reads a linear `git log`.
+- AppKit owns the lifecycle (`main.swift`, `NSApplicationMain`). The SwiftUI `Settings` scene never responded to `showSettingsWindow:` in this accessory app, so Settings and onboarding are plain `NSWindow`s hosting SwiftUI. A main menu built in code keeps ⌘Q and the Edit key equivalents working.
+- The `nomi://` URL scheme (`open`, `close`, `toggle`, `settings`, `welcome`) exists so scripts and the verification steps below can drive the app. `probe` and `closewindows` exist only in Debug builds.
 
 ## Phase 1: Shell
 
@@ -29,9 +31,9 @@ How to resume: read this file and `git log --oneline`, then continue from the fi
 |---|------|--------|-------------|
 | 1 | Xcode project, native .app, signing, .gitignore | done | `xcodebuild build` and `xcodebuild test` succeed; `codesign -dv` shows team MACDPWQG37, hardened runtime, no sandbox |
 | 2 | Notch panel: idle / hover / open, geometry on notched and external displays | done | 11 geometry tests pass; pixel measurement of screenshots: idle 663-848 x 0-32 pt equals housing, hover 659-852 x 0-36, open 545-965 wide; hit-test probe shows transparent pixels pass clicks through |
-| 3 | Global shortcut (Option+Space, configurable) | not started | |
-| 4 | Settings window skeleton, onboarding skeleton | not started | |
-| 5 | Screenshot every state and review | not started | |
+| 3 | Global shortcut (Option+Space, configurable) | done | Synthetic ⌥Space opened the surface, typing and ⌘V paste landed in the field, Escape closed it; recorder changed the shortcut to ⌃⌥N, which then opened the surface, then back to ⌥Space; 11 shortcut and conflict tests pass |
+| 4 | Settings window skeleton, onboarding skeleton | done | Settings window with 9 sections opens from the status item and `nomi://settings`; General has launch at login, menu bar icon, shortcut recorder, sounds, spoken responses; onboarding shows 5 pages on first launch and via `nomi://welcome` |
+| 5 | Screenshot every state and review | done | `docs/screenshots/` holds idle, hover, open (context and surface only), onboarding, settings; reviewed against the visual spec (colours, 24 pt continuous bottom corners, 16/8 pt spacing, 13/11/10 pt type, accent only on the focused field) |
 
 ## Phase 2: Local intelligence
 
@@ -81,3 +83,5 @@ Nothing yet.
 - 2026-09-04: First panel attempt resized the window per state and crashed inside NSHostingView layout (setFrame during a display cycle). Replaced with a fixed window frame.
 - 2026-09-04: `isFloatingPanel = true` resets `level`; the level must be set afterwards or the surface sits under the menu bar.
 - 2026-09-04: zsh has a `log` builtin. Use `/usr/bin/log show --predicate 'subsystem == "com.mehulfursule.nomi"'`.
+- 2026-09-04: Verification posts synthetic mouse and key events with CGEvent (no permission needed). Never post ⌘ key equivalents that way: if Nomi is not the active app they land in whatever is. Use `nomi://closewindows` to close windows.
+- 2026-09-04: Phase 1 complete. Build, 23 tests, launch, notch open/close, shortcut, Settings and onboarding all verified on this machine.

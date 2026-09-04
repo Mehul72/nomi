@@ -8,21 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		01C0EDDB48FF438CFAE74305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F57A504429CA3D5342B6CFB /* Assets.xcassets */; };
+		0DF7435C60A76A3AE30B8F9F /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44903F558633D35AB41C9810 /* MainMenu.swift */; };
 		13C9001663D0EE454B94302E /* NotchGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8279737FA54A5A701590016 /* NotchGeometry.swift */; };
+		14AF80AC5DC9E3B0AA8B0D85 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F34A6A025C810E4981D9F /* ShortcutRecorderView.swift */; };
+		182AF0B4E42901FFF5968495 /* ShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B07B6D2749D5CEDE837BB1E /* ShortcutController.swift */; };
 		19DAFDEBE040E9592FA363C8 /* NotchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987029FC096062E864035EEA /* NotchViewModel.swift */; };
+		1B0C6ED753567553BB94AA44 /* AppDirectories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC35793B28F247C272E132AE /* AppDirectories.swift */; };
+		22ED5BBAEF5407E0C2088998 /* SystemShortcutConflicts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7936C608F9727CBF0C6AB01F /* SystemShortcutConflicts.swift */; };
+		24939A8CE082C36E9B1A492E /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC91B148E823DF5036544CE4 /* GeneralSettingsView.swift */; };
 		3D2907BE79B0C290B47F17D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09420F153618ABA957E35CA2 /* AppDelegate.swift */; };
 		3E91F71B1C68781FB5E2FD0D /* NotchSurfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14358985A4079A6E36227A96 /* NotchSurfaceView.swift */; };
 		415C0746EC92B6A9CEF55E69 /* DisplayLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDAAD83343E04B5D2D7F9B7 /* DisplayLayout.swift */; };
 		5599FE3DBA66D50BCDA5884C /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444201FF9B0296FEC8B239E /* SmokeTests.swift */; };
+		69CE2C588FD1F261E4B6E86C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAE81B29555FBDD56E37A45 /* OnboardingView.swift */; };
+		70E449EEB02648C1B9073D04 /* HotKeyRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E1CC38B9AF7D3DDFC9B55C /* HotKeyRegistrar.swift */; };
 		7492866E12255CBF4C667D62 /* NotchGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD2D3CEB3ACBA60958839DF /* NotchGeometryTests.swift */; };
+		786ED4C749803367BE483ACE /* KeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB686FDD3F1E67EBFC77BC8D /* KeyboardShortcut.swift */; };
 		7E06B192773A3A402D9093EE /* NotchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1082AF822538AACFA9D1F01A /* NotchStyle.swift */; };
-		9B30244B7FD72AD6E226C974 /* NomiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F94FA884532F7CF0E810DA /* NomiApp.swift */; };
+		87D58B0A153A32296B663AC4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF401D37A8C1BD5914DEDCE /* main.swift */; };
 		AC426D78D32C8C57CA0F5DD6 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */; };
 		AD83E4086C42D8D1D77FAD7B /* URLCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389018FF0E75FA335009F6F /* URLCommandHandler.swift */; };
+		B215CFF739007E8DE89067B2 /* KeyboardShortcutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE91C5ADCDE625063B5F24 /* KeyboardShortcutTests.swift */; };
+		BC8BBBDFA2DFE3B44584D730 /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB68D42B9D880BD6E751AE50 /* AboutSettingsView.swift */; };
 		BDD9D607E621444F7AFE082F /* NotchPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA42BFEAE07CCDDF222D7C /* NotchPanelController.swift */; };
+		C03584F8FFEE61036FCAFFF0 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D0C35D468B5A456A7EB674 /* SettingsWindowController.swift */; };
+		C1589617FE146E681EB8D170 /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A00C6E6C91296B3607C5894 /* PrivacySettingsView.swift */; };
 		C18E310D74E635177B619D3D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FCCEEE1514726A5930B1F0 /* Preferences.swift */; };
 		C53835C039A80287357CDA75 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A179787272F6E0D11216E43E /* Log.swift */; };
 		C625384EAFF1991E98ADE460 /* NotchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35D071501015019A7C3044C /* NotchCoordinator.swift */; };
+		D7F65C0DB5FCB031AD7C015A /* OnboardingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E142FE37D288F68B55C6CAF4 /* OnboardingWindowController.swift */; };
 		D8101D4A7EE931E873D9949F /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BFF5961F469D5C9A45E92C /* NotchPanel.swift */; };
 		E325902DAA47BF2E2CA631F8 /* NotchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBACF5CD4615695CCA48127 /* NotchActions.swift */; };
 		F62A0D0C75CA3768A4E3194D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4FF8007C90AE52938E279 /* SettingsView.swift */; };
@@ -43,24 +57,38 @@
 		1082AF822538AACFA9D1F01A /* NotchStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchStyle.swift; sourceTree = "<group>"; };
 		11FCCEEE1514726A5930B1F0 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		14358985A4079A6E36227A96 /* NotchSurfaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchSurfaceView.swift; sourceTree = "<group>"; };
+		35E1CC38B9AF7D3DDFC9B55C /* HotKeyRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyRegistrar.swift; sourceTree = "<group>"; };
 		3F57A504429CA3D5342B6CFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4389018FF0E75FA335009F6F /* URLCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCommandHandler.swift; sourceTree = "<group>"; };
+		44903F558633D35AB41C9810 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		4A00C6E6C91296B3607C5894 /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
+		4E5F34A6A025C810E4981D9F /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorderView.swift; sourceTree = "<group>"; };
 		52D4FF8007C90AE52938E279 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		67F94FA884532F7CF0E810DA /* NomiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomiApp.swift; sourceTree = "<group>"; };
+		6B07B6D2749D5CEDE837BB1E /* ShortcutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutController.swift; sourceTree = "<group>"; };
 		72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		7936C608F9727CBF0C6AB01F /* SystemShortcutConflicts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemShortcutConflicts.swift; sourceTree = "<group>"; };
+		7EFE91C5ADCDE625063B5F24 /* KeyboardShortcutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutTests.swift; sourceTree = "<group>"; };
 		7FD2D3CEB3ACBA60958839DF /* NotchGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchGeometryTests.swift; sourceTree = "<group>"; };
 		7FDAAD83343E04B5D2D7F9B7 /* DisplayLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLayout.swift; sourceTree = "<group>"; };
 		8A6FFF9732BFC6A6EDB88913 /* Nomi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nomi.entitlements; sourceTree = "<group>"; };
+		8DAE81B29555FBDD56E37A45 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		987029FC096062E864035EEA /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
 		A179787272F6E0D11216E43E /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		BB686FDD3F1E67EBFC77BC8D /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
+		BC91B148E823DF5036544CE4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		C4AA42BFEAE07CCDDF222D7C /* NotchPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanelController.swift; sourceTree = "<group>"; };
 		C8279737FA54A5A701590016 /* NotchGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchGeometry.swift; sourceTree = "<group>"; };
+		CCF401D37A8C1BD5914DEDCE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DB68D42B9D880BD6E751AE50 /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
+		E142FE37D288F68B55C6CAF4 /* OnboardingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindowController.swift; sourceTree = "<group>"; };
 		E309461932F89F5AF71FE5D8 /* Nomi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E444201FF9B0296FEC8B239E /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		E5BFF5961F469D5C9A45E92C /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		E949A9D6F277B4FF8919CD04 /* NomiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NomiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9D0C35D468B5A456A7EB674 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		EFBACF5CD4615695CCA48127 /* NotchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchActions.swift; sourceTree = "<group>"; };
 		F35D071501015019A7C3044C /* NotchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchCoordinator.swift; sourceTree = "<group>"; };
+		FC35793B28F247C272E132AE /* AppDirectories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDirectories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -73,9 +101,19 @@
 			);
 			sourceTree = "<group>";
 		};
+		53709B39CFF7E2F1565A0074 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8DAE81B29555FBDD56E37A45 /* OnboardingView.swift */,
+				E142FE37D288F68B55C6CAF4 /* OnboardingWindowController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		54EDE3571A38AF0450334BDA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8ECC6EF8ADC2F6B557A75DA5 /* Shortcuts */,
 				A179787272F6E0D11216E43E /* Log.swift */,
 			);
 			path = Services;
@@ -85,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				6637783FD29C55FE50B70835 /* Notch */,
+				53709B39CFF7E2F1565A0074 /* Onboarding */,
 				E1289B4F63328AA0D1EB8EEE /* Settings */,
 			);
 			path = UI;
@@ -119,6 +158,16 @@
 			path = Nomi;
 			sourceTree = "<group>";
 		};
+		8ECC6EF8ADC2F6B557A75DA5 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				35E1CC38B9AF7D3DDFC9B55C /* HotKeyRegistrar.swift */,
+				BB686FDD3F1E67EBFC77BC8D /* KeyboardShortcut.swift */,
+				7936C608F9727CBF0C6AB01F /* SystemShortcutConflicts.swift */,
+			);
+			path = Shortcuts;
+			sourceTree = "<group>";
+		};
 		ABA0E989C0B2E95BC84078EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +179,7 @@
 		BD7883A36D6C8D3DA382B547 /* NomiTests */ = {
 			isa = PBXGroup;
 			children = (
+				7EFE91C5ADCDE625063B5F24 /* KeyboardShortcutTests.swift */,
 				7FD2D3CEB3ACBA60958839DF /* NotchGeometryTests.swift */,
 				E444201FF9B0296FEC8B239E /* SmokeTests.swift */,
 			);
@@ -139,6 +189,7 @@
 		BF9003BC4083293EE2BBA174 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				FC35793B28F247C272E132AE /* AppDirectories.swift */,
 				11FCCEEE1514726A5930B1F0 /* Preferences.swift */,
 			);
 			path = Persistence;
@@ -148,7 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				09420F153618ABA957E35CA2 /* AppDelegate.swift */,
-				67F94FA884532F7CF0E810DA /* NomiApp.swift */,
+				CCF401D37A8C1BD5914DEDCE /* main.swift */,
+				44903F558633D35AB41C9810 /* MainMenu.swift */,
+				6B07B6D2749D5CEDE837BB1E /* ShortcutController.swift */,
 				72F2C7C472CFC6C05873AB00 /* StatusItemController.swift */,
 				4389018FF0E75FA335009F6F /* URLCommandHandler.swift */,
 			);
@@ -158,7 +211,12 @@
 		E1289B4F63328AA0D1EB8EEE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DB68D42B9D880BD6E751AE50 /* AboutSettingsView.swift */,
+				BC91B148E823DF5036544CE4 /* GeneralSettingsView.swift */,
+				4A00C6E6C91296B3607C5894 /* PrivacySettingsView.swift */,
 				52D4FF8007C90AE52938E279 /* SettingsView.swift */,
+				E9D0C35D468B5A456A7EB674 /* SettingsWindowController.swift */,
+				4E5F34A6A025C810E4981D9F /* ShortcutRecorderView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -266,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B215CFF739007E8DE89067B2 /* KeyboardShortcutTests.swift in Sources */,
 				7492866E12255CBF4C667D62 /* NotchGeometryTests.swift in Sources */,
 				5599FE3DBA66D50BCDA5884C /* SmokeTests.swift in Sources */,
 			);
@@ -275,10 +334,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8BBBDFA2DFE3B44584D730 /* AboutSettingsView.swift in Sources */,
 				3D2907BE79B0C290B47F17D6 /* AppDelegate.swift in Sources */,
+				1B0C6ED753567553BB94AA44 /* AppDirectories.swift in Sources */,
 				415C0746EC92B6A9CEF55E69 /* DisplayLayout.swift in Sources */,
+				24939A8CE082C36E9B1A492E /* GeneralSettingsView.swift in Sources */,
+				70E449EEB02648C1B9073D04 /* HotKeyRegistrar.swift in Sources */,
+				786ED4C749803367BE483ACE /* KeyboardShortcut.swift in Sources */,
 				C53835C039A80287357CDA75 /* Log.swift in Sources */,
-				9B30244B7FD72AD6E226C974 /* NomiApp.swift in Sources */,
+				0DF7435C60A76A3AE30B8F9F /* MainMenu.swift in Sources */,
 				E325902DAA47BF2E2CA631F8 /* NotchActions.swift in Sources */,
 				C625384EAFF1991E98ADE460 /* NotchCoordinator.swift in Sources */,
 				13C9001663D0EE454B94302E /* NotchGeometry.swift in Sources */,
@@ -287,10 +351,18 @@
 				7E06B192773A3A402D9093EE /* NotchStyle.swift in Sources */,
 				3E91F71B1C68781FB5E2FD0D /* NotchSurfaceView.swift in Sources */,
 				19DAFDEBE040E9592FA363C8 /* NotchViewModel.swift in Sources */,
+				69CE2C588FD1F261E4B6E86C /* OnboardingView.swift in Sources */,
+				D7F65C0DB5FCB031AD7C015A /* OnboardingWindowController.swift in Sources */,
 				C18E310D74E635177B619D3D /* Preferences.swift in Sources */,
+				C1589617FE146E681EB8D170 /* PrivacySettingsView.swift in Sources */,
 				F62A0D0C75CA3768A4E3194D /* SettingsView.swift in Sources */,
+				C03584F8FFEE61036FCAFFF0 /* SettingsWindowController.swift in Sources */,
+				182AF0B4E42901FFF5968495 /* ShortcutController.swift in Sources */,
+				14AF80AC5DC9E3B0AA8B0D85 /* ShortcutRecorderView.swift in Sources */,
 				AC426D78D32C8C57CA0F5DD6 /* StatusItemController.swift in Sources */,
+				22ED5BBAEF5407E0C2088998 /* SystemShortcutConflicts.swift in Sources */,
 				AD83E4086C42D8D1D77FAD7B /* URLCommandHandler.swift in Sources */,
+				87D58B0A153A32296B663AC4 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

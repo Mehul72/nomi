@@ -5,9 +5,13 @@ enum URLCommand: String {
     case open
     case close
     case toggle
+    case welcome
+    case settings
     #if DEBUG
     /// Logs which window would receive a click beside the surface, to confirm transparent pixels pass clicks through.
     case probe
+    /// Closes the Settings and Welcome windows so scripted checks never send ⌘W to another app.
+    case closewindows
     #endif
 }
 
